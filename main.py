@@ -8,12 +8,15 @@
 """
 
 # * Se importan librerías
-from utils import calc_eigenvalues, calc_eigenvectors, plot_phase_space, plot_phase_space_trajectory, system_dynamics, trajectory
+from utils import calc_eigenvalues, calc_eigenvectors, plot_phase_space, \
+plot_phase_space_trajectory, system_dynamics, trajectory, general_solution
 from scipy.integrate import odeint
 import numpy as np
 import matplotlib.pyplot as plt
 
 # * Definición de los parámetros del sistema
+
+# 3.1
 gamma = 1
 eta = 3
 delta = 1
@@ -21,6 +24,7 @@ tau = -1
 
 # * Se crea la matriz del sistema y se calculan los eigenvalores y eigenvectores
 A = np.array([[-eta, gamma], [tau, delta]])
+#print(A)
 eigenvalues = calc_eigenvalues(A)
 eigenvectors = calc_eigenvectors(A)
 print("Eigenvalues:", eigenvalues)
@@ -50,7 +54,6 @@ cList, pList = trajectory(C0, P0, gamma, eta, delta, tau, n_steps)
 plot_phase_space_trajectory(C, P, U, V, cList=cList, pList=pList, title='Phase Space with Trajectory')
 
 
-
 # * Simulando la trayectoria
 c_trajectory, p_trajectory = trajectory(C0, P0, gamma, eta, delta, tau, n_steps)
 
@@ -64,6 +67,18 @@ plt.title('Trajectory of Coalition Strength and Parties Internal Factors')
 plt.legend()
 plt.grid(True)
 plt.show()
+
+# * Mostrando la solución general
+
+V1 = eigenvectors[:, 0]
+V2 = eigenvectors[:, 1]
+c_solution, p_solution = general_solution(V1, V2, gamma, eta, delta, tau)
+print("General solution for C(t):", c_solution)
+print("General solution for P(t):", p_solution)
+
+
+
+
 
 
 

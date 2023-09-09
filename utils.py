@@ -12,6 +12,7 @@
 import numpy as np
 from scipy.integrate import odeint
 import matplotlib.pyplot as plt
+import sympy as sp
 # ******************************************
 
 # ! Función que calcula eigenvalores
@@ -78,6 +79,33 @@ def trajectory(c_0, p_0, gamma, eta, delta, tau, n_steps: int):
         pList.append(p_1)
 
     return cList, pList
+
+def general_solution(V1, V2, gamma, eta, delta, tau):
+    # Definir las variables
+    t = sp.symbols('t')
+    alpha = sp.symbols('alpha')
+    beta = sp.symbols('beta')
+
+    # Descomponer los eigenvectores en sus componentes C y P
+    V1_c = V1[0]
+    V1_p = V1[1]
+    
+    V2_c = V2[0]
+    V2_p = V2[1]
+
+    # * Se crea la matriz del sistema y se calculan los eigenvalores y eigenvectores
+    A = np.array([[-eta, gamma], [tau, delta]])
+    eigenvalues = calc_eigenvalues(A)
+
+    lambda1 = eigenvalues[0]  # Primer valor propio
+    lambda2 = eigenvalues[1]  # Segundo valor propio
+
+    # Crear la solución general
+    c_solution = f"C(t) = {alpha} * e^({lambda1} * t) * {V1_c} + {beta} * e^({lambda2} * t) * {V2_c}"
+    p_solution = f"P(t) = {alpha} * e^({lambda1} * t) * {V1_p} + {beta} * e^({lambda2} * t) * {V2_p}"
+
+    return c_solution, p_solution
+
 
 
 

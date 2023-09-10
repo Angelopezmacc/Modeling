@@ -17,10 +17,34 @@ import matplotlib.pyplot as plt
 # * Definición de los parámetros del sistema
 
 # 3.1
-gamma = 1
-eta = 3
-delta = 1
-tau = -1
+# gamma = 1
+# eta = 3
+# delta = 1
+# tau = -1
+
+# 3.2
+# gamma = -2 #  Por la falta de cohesión para colaborar
+# eta = 0.2 # No hay diferencias políticas significativas
+# delta = 0 # La estabilidad de la coalición no afecta la voluntad de cooperar de las partes
+# tau = -0.4 # Factor externo ligeramente desfavorable
+
+# 3.3
+# gamma = 3 #  Por la buena cohesión para colaborar
+# eta = 0.2 # No hay diferencias políticas significativas
+# delta = 0 # La estabilidad de la coalición no afecta la voluntad de cooperar de las partes
+# tau = -0.3 # Factor externo ligeramente desfavorable
+
+# 3.4
+# gamma = 3 #  Por la falta de cohesión para colaborar
+# eta = -5 # Hay diferencias políticas significativas
+# delta = -0.7 # La estabilidad de la coalición tiene un fuerte impacto en la voluntad de cooperar de las partes
+# tau = -2.7 # Influencias externas desfavorables desfavorable
+
+# 3.5
+gamma = 3 #  Por la buena cohesión para colaborar
+eta = -0.3 # Hay diferencias políticas relativamente bajas
+delta = 2.5 # La estabilidad de la coalición tiene un fuerte impacto positivo en la voluntad de cooperar de las partes
+tau = -3 # Influencias externas desfavorables desfavorable
 
 # * Se crea la matriz del sistema y se calculan los eigenvalores y eigenvectores
 A = np.array([[-eta, gamma], [tau, delta]])
@@ -69,7 +93,6 @@ plt.grid(True)
 plt.show()
 
 # * Mostrando la solución general
-
 V1 = eigenvectors[:, 0]
 V2 = eigenvectors[:, 1]
 c_solution, p_solution = general_solution(V1, V2, gamma, eta, delta, tau)
